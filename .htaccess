@@ -1,18 +1,16 @@
+Options -MultiViews
+DirectoryIndex login.html index.html
+
 RewriteEngine On
 
-# Existing files/directories should load directly.
+# Serve real files and directories directly.
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Clean entry URLs for the static EasyLife web export.
-RewriteRule ^$ /index.html [L]
-RewriteRule ^login/?$ /login.html [L,NC]
-RewriteRule ^register/?$ /register.html [L,NC]
-RewriteRule ^profile/?$ /profile.html [L,NC]
-RewriteRule ^gallery/?$ /gallery.html [L,NC]
-RewriteRule ^courses/?$ /courses.html [L,NC]
-RewriteRule ^team/?$ /team.html [L,NC]
+# Map extensionless routes like /register or /ceo/profit to their exported HTML files.
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
 
-# Expo Router nested screens fall back to the app shell.
-RewriteRule ^.*$ /index.html [L]
+# Unknown paths fall back to the login entry instead of a blank shell.
+RewriteRule ^.*$ /login.html [L]
