@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Clean entry URLs for the static EasyLife web export.
+RewriteRule ^$ /login.html [L]
+RewriteRule ^login/?$ /login.html [L,NC]
+RewriteRule ^register/?$ /register.html [L,NC]
+RewriteRule ^profile/?$ /profile.html [L,NC]
+RewriteRule ^gallery/?$ /gallery.html [L,NC]
+RewriteRule ^courses/?$ /courses.html [L,NC]
+RewriteRule ^team/?$ /team.html [L,NC]
